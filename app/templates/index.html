@@ -1,0 +1,463 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AccessiAI — Accessibility Insights</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="brand" href="/">
+    <span class="brand-mark">A</span> AccessiAI
+  </a>
+
+  <nav>
+    <a href="#scanner">Analyzer</a>
+    <a href="#code-optimizer">AI Optimizer</a>
+    <a href="#personalize">Personalize</a>
+    <a href="#history">History</a>
+  </nav>
+</header>
+
+<main class="shell">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <p class="eyebrow">AI-ASSISTED DIGITAL ACCESSIBILITY</p>
+
+      <h1>
+        Make the web<br>
+        <span>work for everyone.</span>
+      </h1>
+
+      <p class="hero-copy">
+        Analyze public webpages, understand accessibility barriers
+        and explore practical improvements.
+      </p>
+
+      <a class="primary-link" href="#scanner">
+        Start an accessibility scan <span>→</span>
+      </a>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
+
+      <div class="access-card">
+        <span class="check">✓</span>
+        <strong>Accessibility<br>starts here.</strong>
+        <small>Discover · Understand · Improve</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="stats">
+    <article>
+      <span class="stat-icon">◎</span>
+      <div>
+        <strong>WCAG-guided</strong>
+        <small>Automated rule checks</small>
+      </div>
+    </article>
+
+    <article>
+      <span class="stat-icon">✦</span>
+      <div>
+        <strong>Actionable insights</strong>
+        <small>Plain-language guidance</small>
+      </div>
+    </article>
+
+    <article>
+      <span class="stat-icon">◉</span>
+      <div>
+        <strong>User-focused</strong>
+        <small>Personalized display tools</small>
+      </div>
+    </article>
+  </section>
+
+  <!-- 01 WEBSITE ANALYZER -->
+  <section class="panel scan-panel" id="scanner">
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">01 / ANALYZE</p>
+        <h2>Accessibility analyzer</h2>
+        <p>
+          Enter a publicly accessible webpage URL to check
+          common WCAG-related issues.
+        </p>
+      </div>
+
+      <span class="pill">axe-core engine</span>
+    </div>
+
+    <form id="scan-form">
+      <label for="url">Website URL</label>
+
+      <div class="url-row">
+        <input
+          id="url"
+          type="url"
+          placeholder="https://example.com"
+          required
+        >
+
+        <button id="scan-button" type="submit">
+          Analyze website →
+        </button>
+      </div>
+
+      <p class="hint">
+        Only scan websites you own or have permission to test.
+        Some sites may block automated browser checks.
+      </p>
+    </form>
+
+    <div id="loading" class="loading hidden" role="status">
+      Scanning webpage and checking accessibility rules…
+    </div>
+
+    <div id="error" class="error hidden" role="alert"></div>
+
+    <div id="results" class="results hidden" aria-live="polite">
+
+      <div class="result-top">
+        <div>
+          <p class="eyebrow">SCAN RESULTS</p>
+          <h3 id="result-title">Results</h3>
+          <p id="result-url" class="muted"></p>
+        </div>
+
+        <div class="score">
+          <strong id="score">—</strong>
+          <span>Indicative score</span>
+        </div>
+      </div>
+
+      <p id="score-note" class="hint"></p>
+
+      <div class="result-metrics">
+        <div>
+          <strong id="violations">0</strong>
+          <span>Violation instances</span>
+        </div>
+
+        <div>
+          <strong id="passes">0</strong>
+          <span>Rules passed</span>
+        </div>
+
+        <div>
+          <strong id="incomplete">0</strong>
+          <span>Needs review</span>
+        </div>
+      </div>
+
+      <h3 class="subheading">Recommended improvements</h3>
+      <div id="issue-list" class="issue-list"></div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI CODE OPTIMIZER -->
+  <section class="panel" id="code-optimizer">
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">02 / OPTIMIZE</p>
+
+        <h2>AI accessibility code optimizer</h2>
+
+        <p>
+          Paste HTML code or upload a file to identify
+          accessibility problems and discover improvements.
+        </p>
+      </div>
+
+      <span class="pill">Code analyzer</span>
+    </div>
+
+    <!-- INPUT METHOD -->
+    <div class="code-input-options">
+
+      <label for="html-file">Upload HTML file</label>
+
+      <input
+        type="file"
+        id="html-file"
+        accept=".html,.htm,text/html"
+      >
+
+      <p class="hint">
+        Supported formats: HTML and HTM. Maximum file size: 500 KB.
+      </p>
+
+    </div>
+
+    <!-- CODE EDITOR -->
+    <div class="code-editor-header">
+      <label for="html-code">HTML source code</label>
+      <span class="pill">HTML</span>
+    </div>
+
+    <textarea
+      id="html-code"
+      class="code-editor"
+      rows="14"
+      placeholder="Paste your HTML code here...
+
+Example:
+
+<!doctype html>
+<html lang='en'>
+<head>
+  <title>My webpage</title>
+</head>
+<body>
+  <img src='photo.jpg'>
+  <button></button>
+</body>
+</html>"
+      spellcheck="false"
+    ></textarea>
+
+    <div class="optimizer-actions">
+
+      <button
+        type="button"
+        id="analyze-code-button"
+      >
+        Analyze HTML →
+      </button>
+
+      <button
+        type="button"
+        id="clear-code-button"
+        class="secondary"
+      >
+        Clear code
+      </button>
+
+    </div>
+
+    <div
+      id="code-loading"
+      class="loading hidden"
+      role="status"
+    >
+      Analyzing HTML accessibility...
+    </div>
+
+    <div
+      id="code-error"
+      class="error hidden"
+      role="alert"
+    ></div>
+
+    <!-- CODE ANALYSIS RESULTS -->
+    <div
+      id="code-results"
+      class="results hidden"
+      aria-live="polite"
+    >
+
+      <p class="eyebrow">ANALYSIS REPORT</p>
+
+      <h3 id="code-result-title">
+        Analysis results
+      </h3>
+
+      <div class="result-metrics">
+        <div>
+          <strong id="code-issue-count">0</strong>
+          <span>Issues detected</span>
+        </div>
+
+        <div>
+          <strong id="code-status">—</strong>
+          <span>Analysis status</span>
+        </div>
+      </div>
+
+      <p id="code-result-message"></p>
+
+      <p id="code-result-note" class="hint"></p>
+
+      <h3 class="subheading">
+        Detected accessibility issues
+      </h3>
+
+      <div
+        id="code-issue-list"
+        class="issue-list"
+      ></div>
+
+    </div>
+
+    <!-- FUTURE AI OPTIMIZATION OUTPUT -->
+    <div class="ai-output-placeholder">
+
+      <div class="ai-output-heading">
+        <span class="stat-icon">✦</span>
+
+        <div>
+          <strong>AI-generated code improvements</strong>
+
+          <small>
+            Proposed corrected code and explanations will appear here
+            after AI model integration.
+          </small>
+        </div>
+      </div>
+
+      <p class="hint">
+        The current version performs preliminary static HTML analysis.
+        AI-generated corrections are a planned next development stage.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- 03 PERSONALIZATION -->
+  <section class="panel" id="personalize">
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">03 / PERSONALIZE</p>
+
+        <h2>Accessibility preferences</h2>
+
+        <p>
+          Try display and reading controls.
+          These settings affect this page as a demonstration.
+        </p>
+      </div>
+    </div>
+
+    <div class="preference-grid">
+
+      <div class="preference">
+        <div>
+          <strong>Text size</strong>
+          <small>Adjust reading comfort</small>
+        </div>
+
+        <div class="control-row">
+          <button type="button" id="smaller" aria-label="Decrease text size">
+            A−
+          </button>
+
+          <button type="button" id="larger" aria-label="Increase text size">
+            A+
+          </button>
+        </div>
+      </div>
+
+      <div class="preference">
+        <div>
+          <strong>High contrast</strong>
+          <small>Increase visual contrast</small>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" id="contrast">
+          <span></span>
+        </label>
+      </div>
+
+      <div class="preference">
+        <div>
+          <strong>Read this page aloud</strong>
+          <small>Uses your browser's speech support</small>
+        </div>
+
+        <button type="button" class="secondary" id="read-page">
+          ▶ Read
+        </button>
+      </div>
+
+      <div class="preference">
+        <div>
+          <strong>Stop speech</strong>
+          <small>Stop current narration</small>
+        </div>
+
+        <button type="button" class="secondary" id="stop-reading">
+          ■ Stop
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 RECENT SCANS -->
+  <section class="panel" id="history">
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">04 / RECENT ACTIVITY</p>
+
+        <h2>Recent scans</h2>
+
+        <p>
+          Your latest scan records on this application.
+        </p>
+      </div>
+    </div>
+
+    <div class="history-list">
+
+      {% for item in recent %}
+
+      <div class="history-item">
+
+        <div>
+          <strong>{{ item.target_url }}</strong>
+
+          <small>
+            {{ item.created_at.strftime('%d %b %Y, %H:%M') }} UTC
+          </small>
+        </div>
+
+        <span class="history-score">
+          {{ item.score }}/100
+        </span>
+
+      </div>
+
+      {% else %}
+
+      <p class="empty">
+        No scans yet. Your scan history will appear here.
+      </p>
+
+      {% endfor %}
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>AccessiAI</span>
+
+    <span>
+      Designed to support a more inclusive digital experience.
+    </span>
+  </footer>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>
